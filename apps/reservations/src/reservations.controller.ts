@@ -27,16 +27,19 @@ export class ReservationsController {
   }
 
   @Get()
+  @UseGuards(CommonAuthGuard)
   async findAll() {
     return this.reservationsService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(CommonAuthGuard)
   async findOne(@Param('id') id: string) {
     return this.reservationsService.findOne(id);
   }
 
   @Patch(':id')
+  @UseGuards(CommonAuthGuard)
   async update(
     @Param('id') id: string,
     @Body() updateReservationDto: UpdateReservationDto,
@@ -45,6 +48,7 @@ export class ReservationsController {
   }
 
   @Delete(':id')
+  @UseGuards(CommonAuthGuard)
   async remove(@Param('id') id: string) {
     return this.reservationsService.remove(id);
   }
