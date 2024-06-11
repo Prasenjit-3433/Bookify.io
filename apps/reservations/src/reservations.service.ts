@@ -9,11 +9,11 @@ export class ReservationsService {
     private readonly reservationsRepository: ReservationsRepository,
   ) {}
 
-  create(createReservationDto: CreateReservationDto) {
+  create(createReservationDto: CreateReservationDto, userId: string) {
     return this.reservationsRepository.create({
       ...createReservationDto,
       timestamp: new Date(),
-      userId: 'come-from-jwt',
+      userId,
     });
   }
 
