@@ -15,5 +15,19 @@ spec:
         app: payments
     spec:
       containers:
-      - image: 905418098172.dkr.ecr.us-east-1.amazonaws.com/payments:latest
-        name: payments
+        - image: 905418098172.dkr.ecr.us-east-1.amazonaws.com/payments:latest
+          name: payments
+          env:
+            - name: PORT
+              value: '3001'
+            - name: NOTIFICATIONS_HOST
+              value: notifications
+            - name: NOTIFICATIONS_PORT
+              value: '3000'
+            - name: STRIPE_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: stripe
+                  key: apiKey
+          ports:
+            - containerPort: 3001

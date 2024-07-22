@@ -15,5 +15,24 @@ spec:
         app: notifications
     spec:
       containers:
-      - image: 905418098172.dkr.ecr.us-east-1.amazonaws.com/notifications:latest
-        name: notifications
+        - image: 905418098172.dkr.ecr.us-east-1.amazonaws.com/notifications:latest
+          name: notifications
+          env:
+            - name: PORT
+              value: '3000'
+            - name: GOOGLE_OAUTH_CLIENT_ID
+              value: 562919924723-dlodiu3pta54dvg7svnjv6nr5g5igmbd.apps.googleusercontent.com
+            - name: SMTP_USER
+              value: sutraprasenjit091@gmail.com
+            - name: GOOGLE_OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef: 
+                  name: google
+                  key: clientSecret
+            - name: GOOGLE_OAUTH_REFRESH_TOKEN
+              valueFrom:
+                secretKeyRef: 
+                  name: google
+                  key: refreshToken
+          ports:
+            - containerPort: 3000
