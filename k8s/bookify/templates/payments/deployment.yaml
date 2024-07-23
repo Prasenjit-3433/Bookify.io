@@ -15,7 +15,7 @@ spec:
         app: payments
     spec:
       containers:
-        - image: 905418098172.dkr.ecr.us-east-1.amazonaws.com/payments:latest
+        - image: 905418098172.dkr.ecr.ap-south-1.amazonaws.com/payments:latest
           name: payments
           env:
             - name: PORT

@@ -15,7 +15,7 @@ spec:
         app: auth
     spec:
       containers:
-        - image: 905418098172.dkr.ecr.us-east-1.amazonaws.com/auth:latest
+        - image: 905418098172.dkr.ecr.ap-south-1.amazonaws.com/auth:latest
           name: auth
           env:
             - name: MONGODB_URI
