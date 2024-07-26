@@ -11,7 +11,7 @@ import {
 import { ReservationsService } from './reservations.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { CommonAuthGuard, CurrentUser, Roles, UserDto } from '@app/common';
+import { CommonAuthGuard, CurrentUser, Roles, User } from '@app/common';
 
 @Controller('reservations')
 export class ReservationsController {
@@ -21,7 +21,7 @@ export class ReservationsController {
   @UseGuards(CommonAuthGuard)
   async create(
     @Body() createReservationDto: CreateReservationDto,
-    @CurrentUser() user: UserDto,
+    @CurrentUser() user: User,
   ) {
     return this.reservationsService.create(createReservationDto, user);
   }
