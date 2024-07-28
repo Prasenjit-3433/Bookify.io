@@ -1,4 +1,3 @@
-```markdown
 # 🗓️Bookify.io - Reservation Booking System
 
 **Bookify.io** is a cutting-edge, production-grade backend designed with four independent microservices, seamlessly integrated using a robust NestJS microservice architecture. Built from the ground up, this system prioritizes scalability and simplicity, adhering strictly to best practices.
@@ -76,4 +75,3 @@ To facilitate debugging, a debugger was connected to the microservices running i
 - **IDE Debugger Connection:** Finally, connect the debugger in your IDE. In VSCode, create a **`launch.json`** file and configure it to connect to the debugging port.
 
 This approach ensures an efficient and effective debugging process, providing deeper insights into the application's runtime behavior.
-```
