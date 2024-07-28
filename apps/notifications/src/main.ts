@@ -10,10 +10,11 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   app.connectMicroservice({
-    transport: Transport.TCP,
+    transport: Transport.RMQ,
     options: {
-      host: '0.0.0.0',
-      port: configService.get('PORT'),
+      urls: [configService.getOrThrow('RABBITMQ_URI')],
+      noAck: false,
+      queue: 'notifications',
     },
   });
 
