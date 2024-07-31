@@ -25,7 +25,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
           transport: Transport.RMQ,
           options: {
             urls: [configService.getOrThrow<string>('RABBITMQ_URI')],
-            queue: 'payments',
+            queue: 'notifications',
           },
         }),
         inject: [ConfigService],
