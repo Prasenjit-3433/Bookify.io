@@ -1,29 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import * as nodemailer from 'nodemailer';
+import * as twilio from 'twilio';
 import { NotifyEmailDto } from './dto/notify-email.dto';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class NotificationsService {
-  constructor(private readonly configService: ConfigService) {}
+  private readonly client: twilio.Twilio;
 
-  private readonly transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      type: 'OAuth2',
-      user: this.configService.get('SMTP_USER'),
-      clientId: this.configService.get('GOOGLE_OAUTH_CLIENT_ID'),
-      clientSecret: this.configService.get('GOOGLE_OAUTH_CLIENT_SECRET'),
-      refreshToken: this.configService.get('GOOGLE_OAUTH_REFRESH_TOKEN'),
-    },
-  });
+  constructor(private readonly configService: ConfigService) {
+    this.client = twilio(
+      this.configService.get('TWILIO_ACCOUNT_SID'),
+      this.configService.get('TWILIO_AUTH_TOKEN'),
+    );
+  }
 
-  async notifyEmail({ email, text }: NotifyEmailDto) {
-    await this.transporter.sendMail({
-      from: this.configService.get('SMTP_USER'),
-      to: email,
-      subject: 'Bookify.io Notification',
-      text,
-    });
+  async sendSMS(text: string): Promise<string> {
+    try {
+      const response = await this.client.messages.create({
+        body: text,
+        from: '+17696001558',
+        to: '+918944880305',
+      });
+      return `SMS sent successfully (SID: ${response.sid})`;
+    } catch (error) {
+      console.error('Error sending SMS:', error);
+      throw error; // Re-throw for proper error handling
+    }
+  }
+
+  async notifyEmail({ email, text }: NotifyEmailDto) {}
+
+  async notify({ email, text }: NotifyEmailDto) {
+    await this.sendSMS(text);
+    await this.notifyEmail({ email, text });
   }
 }
