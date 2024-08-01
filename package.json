@@ -37,6 +37,7 @@
     "class-validator": "^0.14.1",
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
+    "googleapis": "^140.0.1",
     "joi": "^17.13.1",
     "mongoose": "^8.4.1",
     "mysql2": "^3.10.3",
