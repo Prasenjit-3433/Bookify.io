@@ -15,6 +15,7 @@ import { NotificationsService } from './notifications.service';
         GOOGLE_OAUTH_CLIENT_ID: Joi.string().required(),
         GOOGLE_OAUTH_CLIENT_SECRET: Joi.string().required(),
         GOOGLE_OAUTH_REFRESH_TOKEN: Joi.string().required(),
+        GOOGLE_REDIRECT_URI: Joi.string().required(),
         TWILIO_ACCOUNT_SID: Joi.string().required(),
         TWILIO_AUTH_TOKEN: Joi.string().required(),
         TWILIO_PHONE_NUMBER: Joi.string().required(),
