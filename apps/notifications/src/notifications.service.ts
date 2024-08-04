@@ -22,12 +22,12 @@ export class NotificationsService {
     });
   }
 
-  async sendSMS(text: string): Promise<string> {
+  async sendSMS(text: string, ph: string): Promise<string> {
     try {
       const response = await this.client.messages.create({
         body: text,
         from: `${this.configService.get('TWILIO_PHONE_NUMBER')}`,
-        to: '+918944880305',
+        to: ph,
       });
       return `SMS sent successfully (SID: ${response.sid})`;
     } catch (error) {
@@ -66,9 +66,9 @@ export class NotificationsService {
     }
   }
 
-  async notify({ email, text }: NotifyEmailDto) {
+  async notify({ email, text, ph }: NotifyEmailDto) {
     // while developing, it's turned off:
-    // await this.sendSMS(text);
-    // await this.notifyEmail({ email, text });
+    await this.sendSMS(text, ph);
+    await this.notifyEmail({ email, text, ph });
   }
 }

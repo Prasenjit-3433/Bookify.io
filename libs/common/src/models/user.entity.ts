@@ -8,6 +8,9 @@ export class User extends AbstractEntity<User> {
   email: string;
 
   @Column()
+  ph: string;
+
+  @Column()
   password: string;
 
   @ManyToMany(() => Role, { cascade: true })

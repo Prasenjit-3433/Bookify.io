@@ -17,12 +17,13 @@ export class ReservationsService {
 
   async create(
     createReservationDto: CreateReservationDto,
-    { id: userId, email }: User,
+    { id: userId, email, ph }: User,
   ) {
     return this.paymentsService
       .send('create_charge', {
         ...createReservationDto.charge,
         email,
+        ph,
       })
       .pipe(
         map(async (res) => {

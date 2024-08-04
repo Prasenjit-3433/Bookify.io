@@ -20,7 +20,7 @@ export class PaymentsService {
     private readonly notificationService: ClientProxy,
   ) {}
 
-  async createCharge({ amount, email }: PaymentsCreateChargeDto) {
+  async createCharge({ amount, email, ph }: PaymentsCreateChargeDto) {
     const paymentIntent = await this.stripe.paymentIntents.create({
       amount: amount * 100,
       confirm: true,
@@ -34,6 +34,7 @@ export class PaymentsService {
 
     this.notificationService.emit('notify_email', {
       email,
+      ph,
       text: `Payment of $${amount} has completed successfully`,
     });
 
