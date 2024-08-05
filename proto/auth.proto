@@ -3,32 +3,22 @@ syntax = "proto3";
 package auth;
 
 service AuthService {
-    rpc CreateUser (UserCredentials) returns (UserResponse) {}
-    rpc GetUser (AuthToken) returns (UserResponse) {}
-    rpc Login (UserCredentials) returns (UserResponse) {}
-    rpc Authenticate (AuthToken) returns (UserResponse) {}
+    rpc Authenticate (Authentication) returns (UserMessage) {}
 }
 
-message Role {
-    string id = 1;
+message UserRole {
+    int32 id = 1;
     string name = 2;
 }
 
-message UserResponse {
-    string id = 1;
+message UserMessage {
+    int32 id = 1;
     string email = 2;
     string password = 3;
     string ph = 4;
-    repeated Role roles = 5;
+    repeated UserRole roles = 5;
 }
 
-message UserCredentials {
-    string email = 1;
-    string password = 2;
-    string ph = 3;
-    repeated Role roles = 4;
-}
-
-message AuthToken {
+message Authentication {
     string Authentication = 1;
 }
