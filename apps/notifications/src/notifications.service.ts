@@ -68,7 +68,7 @@ export class NotificationsService {
 
   async notify({ email, text, ph }: NotifyEmailDto) {
     // while developing, it's turned off:
-    await this.sendSMS(text, ph);
-    await this.notifyEmail({ email, text, ph });
+    // await this.sendSMS(text, ph);
+    // await this.notifyEmail({ email, text, ph });
   }
 }
