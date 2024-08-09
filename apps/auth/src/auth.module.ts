@@ -8,6 +8,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -29,6 +31,12 @@ import { JwtStrategy } from './strategies/jwt.strategy';
         JWT_EXPIRATION: Joi.string().required(),
         HTTP_PORT: Joi.number().required(),
       }),
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloFederationDriver,
+      autoSchemaFile: {
+        federation: 2,
+      },
     }),
     HealthModule,
   ],
