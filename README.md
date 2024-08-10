@@ -62,6 +62,9 @@ As it can be seen that **`Reservations`**, **`Auth`**, and **`Payments`** servic
 - **Problem with the initial Setup:** In the beginning, the system had a straightforward setup. All incoming requests were handled by the **`Reservations`** & **`Auth`** microservice. Reservation service was the entry points for everything—CRUD operations for reservations, and Auth service for user authentication, and authorization. It worked, but as the system grew, this setup started to feel limiting. We were exposing multiple endpoints, each tied to a specific microservice. The system was becoming harder to manage, and it was clear we needed a more efficient way to handle API requests.
 - **The Solution - Apollo Federation:** We turned to Apollo Federation to streamline this complexity. By stitching together multiple microservices into a single, unified GraphQL endpoint, Apollo Federation allowed us to expose just one API gateway to our users, while keeping the underlying services separate and specialized.
 
+<p align="center">
+  <img src="diagrams/API Gateway.gif" alt="API Gateway" />
+</p>
 
 ## 🚀Production Deployment
 
