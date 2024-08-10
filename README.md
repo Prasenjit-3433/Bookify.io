@@ -39,7 +39,7 @@ A migration from **MongoDB to MySQL** was later performed to implement **RBAC** 
 ## 📨Communication: From TCP to gRPC & RabbitMQ
 
 <p align="center">
-  <img src="diagrams/diagram_01.gif" alt="TCP" />
+  <img src="diagrams/diagram_1.gif" alt="TCP" />
 </p>
 
 - **Initial Setup with TCP:** Initially, all four microservices communicated via the **`TCP`** transport layer in Nest.js.
