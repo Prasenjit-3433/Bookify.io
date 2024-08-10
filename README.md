@@ -39,7 +39,7 @@ A migration from **MongoDB to MySQL** was later performed to implement **RBAC** 
 ## 📨Communication: From TCP to gRPC & RabbitMQ
 
 <p align="center">
-  <img src="diagrams/diagram-001.gif" alt="TCP" />
+  <img src="diagrams/plain-tcp.gif" alt="TCP" />
 </p>
 
 - **Initial Setup with TCP:** Initially, all four microservices communicated via the **`TCP`** transport layer in Nest.js.
@@ -47,9 +47,16 @@ A migration from **MongoDB to MySQL** was later performed to implement **RBAC** 
 - **Implementing the Solution with RabbitMQ:** Transitioning to asynchronous communication with RabbitMQ introduced the concept of a queue. This queue holds messages until they are ready to be processed, ensuring reliable message delivery. If there is a large backlog of messages, they are processed one at a time, preventing system overload. Additionally, failed messages can be re-queued and retried, ensuring no data is lost and enhancing the system's reliability and resilience.
 
 <p align="center">
-  <img src="diagrams/diagram_002.gif" alt="TCP" />
+  <img src="diagrams/RabbitMQ.gif" alt="RabbitMQ" />
 </p>
 
+As it can be seen that **`Reservations`**, **`Auth`**, and **`Payments`** services still use **`TCP`** as the communication protocol. 
+- **Problem with TCP:** TCP communication lacked efficiency and robust error handling, leading to higher latency, inconsistent data serialization, and difficulties in scaling the system as interservice communication grew more complex.
+- **Solution with gRPC:** gRPC offers efficient data serialization with Protocol Buffers, built-in error handling, and supports bi-directional streaming. This ensures faster, secure, and more reliable communication between microservices, making the system easier to scale and maintain.
+  
+<p align="center">
+  <img src="diagrams/gRPC.gif" alt="gRPC" />
+</p>
 
 ## ❄️API Gateway: GraphQL-Apollo Federation
 - **Problem with the initial Setup:** In the beginning, the system had a straightforward setup. All incoming requests were handled by the **`Reservations`** & **`Auth`** microservice. Reservation service was the entry points for everything—CRUD operations for reservations, and Auth service for user authentication, and authorization. It worked, but as the system grew, this setup started to feel limiting. We were exposing multiple endpoints, each tied to a specific microservice. The system was becoming harder to manage, and it was clear we needed a more efficient way to handle API requests.
