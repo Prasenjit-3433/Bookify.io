@@ -39,12 +39,17 @@ A migration from **MongoDB to MySQL** was later performed to implement **RBAC** 
 ## 📨Communication: From TCP to gRPC & RabbitMQ
 
 <p align="center">
-  <img src="diagrams/diagram_1.gif" alt="TCP" />
+  <img src="diagrams/diagram-001.gif" alt="TCP" />
 </p>
 
 - **Initial Setup with TCP:** Initially, all four microservices communicated via the **`TCP`** transport layer in Nest.js.
 - **Identifying the Problem:** The main issue with using TCP was the lack of message reliability. For instance, if the payment service successfully charged a customer and sent a request to the notification service to send an SMS and email, but the notification service failed, the request would be lost. This inability to retry failed messages and the lack of queuing led to potential message loss and system overload during high traffic.
 - **Implementing the Solution with RabbitMQ:** Transitioning to asynchronous communication with RabbitMQ introduced the concept of a queue. This queue holds messages until they are ready to be processed, ensuring reliable message delivery. If there is a large backlog of messages, they are processed one at a time, preventing system overload. Additionally, failed messages can be re-queued and retried, ensuring no data is lost and enhancing the system's reliability and resilience.
+
+<p align="center">
+  <img src="diagrams/diagram_002.gif" alt="TCP" />
+</p>
+
 
 ## ❄️API Gateway: GraphQL-Apollo Federation
 - **Problem with the initial Setup:** In the beginning, the system had a straightforward setup. All incoming requests were handled by the **`Reservations`** & **`Auth`** microservice. Reservation service was the entry points for everything—CRUD operations for reservations, and Auth service for user authentication, and authorization. It worked, but as the system grew, this setup started to feel limiting. We were exposing multiple endpoints, each tied to a specific microservice. The system was becoming harder to manage, and it was clear we needed a more efficient way to handle API requests.
