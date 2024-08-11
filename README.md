@@ -72,6 +72,10 @@ As it can be seen that **`Reservations`**, **`Auth`**, and **`Payments`** servic
 - **Local Development with Minikube, Docker, and Helm:** During development, all four microservices run inside Docker containers managed by Minikube. Helm charts are used to generate `deployment.yaml` and `service.yaml` files for each microservice, streamlining the deployment process. This setup closely mimics the production environment, enabling consistent testing and early detection of issues.
 - **Container Images and AWS ECR:** All four microservice images are pushed to private repositories on AWS Elastic Container Registry (ECR). AWS CloudFormation is then used to automate the creation and management of EC2 instances with a YAML file.
 - **CI/CD Pipeline with AWS CodePipeline:** AWS CodePipeline automates the CI/CD process, integrating AWS CodeBuild for building and AWS EKS for deploying the application. The deployment provisions a MongoDB Atlas instance in the ap-south-1 region and exposes the application with a real load balancer, ensuring a scalable and reliable production environment.
+  
+<p align="center">
+  <img src="diagrams/Production.gif" alt="Production"
+</p>
 
 ## 🐞Debugging Setup
 
